@@ -10,4 +10,18 @@
 
 @implementation GTSingleton
 
++(GTSingleton *)sharedSingleton
+{
+    static GTSingleton *_sharedSingleton = nil;
+    
+    static dispatch_once_t oncePredicate;
+    
+    dispatch_once(&oncePredicate, ^{
+        _sharedSingleton = [[GTSingleton alloc] init];
+        
+    });
+    
+    return _sharedSingleton;
+}
+
 @end
